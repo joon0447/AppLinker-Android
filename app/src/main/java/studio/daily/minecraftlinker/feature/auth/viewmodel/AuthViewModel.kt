@@ -1,4 +1,4 @@
-package studio.daily.minecarftlinker.feature.auth.viewmodel
+package studio.daily.minecraftlinker.feature.auth.viewmodel
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
@@ -20,6 +20,9 @@ class AuthViewModel : ViewModel() {
 
     private val _isCodeValid = MutableStateFlow(false)
     val isCodeValid: StateFlow<Boolean> = _isCodeValid
+
+    private val _error = MutableStateFlow<String?>(null)
+    val error: StateFlow<String?> = _error
 
     fun onCodeChanged(code: String) {
         _authCode.value = code
@@ -43,6 +46,8 @@ class AuthViewModel : ViewModel() {
                     val uuid = document.id
                     _uuid.value = uuid
                     Log.d("AuthViewModel", "uuid : $uuid")
+                } else {
+                    _error.value = "해당 코드를 찾을 수 없습니다."
                 }
             } catch (e: Exception) {
                 Log.e("AuthViewModel", "오류", e)

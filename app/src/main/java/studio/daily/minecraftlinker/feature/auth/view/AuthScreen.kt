@@ -1,4 +1,4 @@
-package studio.daily.minecarftlinker.feature.auth.view
+package studio.daily.minecraftlinker.feature.auth.view
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -27,11 +27,9 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.LocalTextStyle
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -42,7 +40,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 
-import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Brush
@@ -62,8 +59,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import studio.daily.minecarftlinker.R
-import studio.daily.minecarftlinker.feature.auth.viewmodel.AuthViewModel
+import studio.daily.minecraftlinker.R
+import studio.daily.minecraftlinker.feature.auth.viewmodel.AuthViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Preview
@@ -71,6 +68,17 @@ import studio.daily.minecarftlinker.feature.auth.viewmodel.AuthViewModel
 fun AuthScreen(viewModel: AuthViewModel = viewModel()) {
     val code by viewModel.authCode.collectAsState()
     val isValid by viewModel.isCodeValid.collectAsState()
+
+    val uuid by viewModel.uuid.collectAsState()
+    val error by viewModel.error.collectAsState()
+
+    uuid?.let {
+
+    }
+
+    error?.let {
+
+    }
 
     Scaffold(
         topBar = {
@@ -176,7 +184,10 @@ fun AuthScreen(viewModel: AuthViewModel = viewModel()) {
                     )
                     HelpContainer()
                     Spacer(Modifier.height(32.dp))
-                    ConnectButton(enabled = isValid)
+                    ConnectButton(enabled = isValid,
+                        onClick = {
+                            viewModel.connectToServer()
+                        })
                 }
             }
         }
@@ -294,8 +305,8 @@ private fun HelpContainer() {
 
 @Composable
 private fun ConnectButton(
-    onClick: () -> Unit = {},
-    enabled: Boolean = true
+    onClick: () -> Unit,
+    enabled: Boolean
 ) {
     Button(
         onClick = onClick,
