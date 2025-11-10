@@ -176,7 +176,7 @@ fun AuthScreen(viewModel: AuthViewModel = viewModel()) {
                     )
                     HelpContainer()
                     Spacer(Modifier.height(32.dp))
-                    ConnectButton()
+                    ConnectButton(enabled = isValid)
                 }
             }
         }
@@ -294,16 +294,18 @@ private fun HelpContainer() {
 
 @Composable
 private fun ConnectButton(
-    onClick: () -> Unit = {}
+    onClick: () -> Unit = {},
+    enabled: Boolean = true
 ) {
     Button(
         onClick = onClick,
+        enabled = enabled,
         modifier = Modifier
             .fillMaxWidth()
             .height(48.dp),
         shape = RoundedCornerShape(12.dp),
         colors = ButtonDefaults.buttonColors(
-            containerColor = Color(0xFF7C83FF),
+            containerColor = if (enabled) Color(0xFF7C83FF) else Color(0xFFBFC3FF),
             contentColor = Color.White
         ),
         elevation = ButtonDefaults.buttonElevation(defaultElevation = 0.dp)
