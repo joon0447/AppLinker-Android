@@ -11,6 +11,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import studio.daily.minecarftlinker.feature.home.guest.view.GuestScreen
 import studio.daily.minecarftlinker.ui.theme.MinecarftLinkerTheme
 
 class MainActivity : ComponentActivity() {
@@ -19,7 +20,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             MinecarftLinkerTheme {
-
+                GuestScreen()
             }
         }
     }

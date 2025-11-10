@@ -16,3 +16,7 @@ val Blue40 = Color(0xFF2196F3)
 val Blue20 = Color(0xFF1976D2)
 
 val Gray40 = Color(0xFFF7F7F7)
+
+val Green20 = Color(0xFF22C55E)
+
+val Orange20 = Color(0xFFF59E0B)
