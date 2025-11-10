@@ -1,4 +1,4 @@
-package studio.daily.minecarftlinker.feature.home.guest.view
+package studio.daily.minecraftlinker.feature.home.guest.view
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -32,10 +32,10 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import studio.daily.minecarftlinker.R
-import studio.daily.minecarftlinker.feature.home.guest.model.Menu
-import studio.daily.minecarftlinker.ui.theme.Blue20
-import studio.daily.minecarftlinker.ui.theme.Green20
+import studio.daily.minecraftlinker.R
+import studio.daily.minecraftlinker.feature.home.guest.model.Menu
+import studio.daily.minecraftlinker.ui.theme.Blue20
+import studio.daily.minecraftlinker.ui.theme.Green20
 
 
 @Composable

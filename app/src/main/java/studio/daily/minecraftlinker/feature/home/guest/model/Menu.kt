@@ -1,11 +1,10 @@
-package studio.daily.minecarftlinker.feature.home.guest.model
+package studio.daily.minecraftlinker.feature.home.guest.model
 
-import androidx.annotation.DrawableRes
 import androidx.compose.ui.graphics.Color
-import studio.daily.minecarftlinker.R
-import studio.daily.minecarftlinker.ui.theme.Green20
-import studio.daily.minecarftlinker.ui.theme.Orange20
-import studio.daily.minecarftlinker.ui.theme.Purple40
+import studio.daily.minecraftlinker.R
+import studio.daily.minecraftlinker.ui.theme.Green20
+import studio.daily.minecraftlinker.ui.theme.Orange20
+import studio.daily.minecraftlinker.ui.theme.Purple40
 
 enum class Menu (
     val title: String,

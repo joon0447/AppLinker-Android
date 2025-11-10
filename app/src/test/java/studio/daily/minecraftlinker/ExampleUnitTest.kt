@@ -1,4 +1,4 @@
-package studio.daily.minecarftlinker
+package studio.daily.minecraftlinker
 
 import org.junit.Test
 

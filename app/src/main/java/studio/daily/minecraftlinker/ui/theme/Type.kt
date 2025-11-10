@@ -1,4 +1,4 @@
-package studio.daily.minecarftlinker.ui.theme
+package studio.daily.minecraftlinker.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "studio.daily.minecarftlinker"
+    namespace = "studio.daily.minecraftlinker"
     compileSdk {
         version = release(36)
     }
