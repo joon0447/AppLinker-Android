@@ -8,8 +8,9 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
+import studio.daily.minecraftlinker.core.datastore.UuidStore
 
-class AuthViewModel : ViewModel() {
+class AuthViewModel(private val uuidStore: UuidStore) : ViewModel() {
 
     private val db = FirebaseFirestore.getInstance()
 
@@ -45,6 +46,7 @@ class AuthViewModel : ViewModel() {
 
                     val uuid = document.id
                     _uuid.value = uuid
+                    uuidStore.saveUUID(uuid)
                     Log.d("AuthViewModel", "uuid : $uuid")
                 } else {
                     _error.value = "해당 코드를 찾을 수 없습니다."

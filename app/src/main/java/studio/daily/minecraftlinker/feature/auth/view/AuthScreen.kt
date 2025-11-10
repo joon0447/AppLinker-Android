@@ -49,6 +49,7 @@ import androidx.compose.ui.input.key.KeyEventType
 import androidx.compose.ui.input.key.key
 import androidx.compose.ui.input.key.onKeyEvent
 import androidx.compose.ui.input.key.type
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -60,12 +61,19 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import studio.daily.minecraftlinker.R
+import studio.daily.minecraftlinker.core.datastore.UuidStore
 import studio.daily.minecraftlinker.feature.auth.viewmodel.AuthViewModel
+import studio.daily.minecraftlinker.feature.auth.viewmodel.AuthViewModelFactory
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Preview
 @Composable
-fun AuthScreen(viewModel: AuthViewModel = viewModel()) {
+fun AuthScreen() {
+    val context = LocalContext.current
+    val uuidStore = remember { UuidStore(context) }
+    val viewModel: AuthViewModel = viewModel(
+        factory = AuthViewModelFactory(uuidStore)
+    )
     val code by viewModel.authCode.collectAsState()
     val isValid by viewModel.isCodeValid.collectAsState()
 
