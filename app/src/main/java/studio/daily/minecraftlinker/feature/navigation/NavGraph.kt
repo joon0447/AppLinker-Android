@@ -1,15 +1,9 @@
 package studio.daily.minecraftlinker.feature.navigation
 
-import android.widget.MediaController
-import androidx.compose.animation.core.tween
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
 import androidx.navigation.NavHostController
-import androidx.navigation.NavType
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.navigation.activity
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import studio.daily.minecraftlinker.feature.auth.view.AuthScreen
@@ -34,8 +28,7 @@ fun AppNavGraph(navController: NavHostController) {
     NavHost(
         navController = navController,
         startDestination = Routes.SPLASH,
-        enterTransition = { fadeIn(animationSpec = tween(0)) },
-        exitTransition = { fadeOut(animationSpec = tween(0)) }) {
+    ) {
 
         composable(Routes.SPLASH) {
             LoadingScreen(
