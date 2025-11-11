@@ -66,9 +66,10 @@ import studio.daily.minecraftlinker.feature.auth.viewmodel.AuthViewModel
 import studio.daily.minecraftlinker.feature.auth.viewmodel.AuthViewModelFactory
 
 @OptIn(ExperimentalMaterial3Api::class)
-@Preview
 @Composable
-fun AuthScreen() {
+fun AuthScreen(
+    onBack: () -> Unit
+) {
     val context = LocalContext.current
     val uuidStore = remember { UuidStore(context) }
     val viewModel: AuthViewModel = viewModel(
@@ -92,7 +93,9 @@ fun AuthScreen() {
         topBar = {
             CenterAlignedTopAppBar(
                 navigationIcon = {
-                    IconButton(onClick = {}) {
+                    IconButton(onClick = {
+                        onBack()
+                    }) {
                         Icon(
                             imageVector = Icons.AutoMirrored.Rounded.ArrowBack,
                             contentDescription = "뒤로"

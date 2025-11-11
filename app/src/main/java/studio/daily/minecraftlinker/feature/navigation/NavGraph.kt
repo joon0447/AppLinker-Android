@@ -9,6 +9,7 @@ import androidx.navigation.NavType
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.activity
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import studio.daily.minecraftlinker.feature.auth.view.AuthScreen
@@ -57,7 +58,17 @@ fun AppNavGraph(navController: NavHostController) {
         }
 
         composable(Routes.AUTH) {
-            AuthScreen()
+            AuthScreen(
+                onBack = {
+                    val popped = navController.popBackStack()
+
+                    if(!popped) {
+                        navController.navigate(Routes.SPLASH) {
+                            launchSingleTop = true
+                        }
+                    }
+                }
+            )
         }
 
         composable(Routes.HOME) {
