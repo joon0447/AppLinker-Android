@@ -39,8 +39,9 @@ import studio.daily.minecraftlinker.ui.theme.Green20
 
 
 @Composable
-@Preview
-fun GuestScreen() {
+fun GuestScreen(
+    onNavigateToAuth: () -> Unit
+) {
 
     val statusBarHeight = WindowInsets.statusBars.asPaddingValues().calculateTopPadding()
     Column(
@@ -76,7 +77,9 @@ fun GuestScreen() {
                     Spacer(modifier = Modifier.height(20.dp))
 
                     Button(
-                        onClick = {},
+                        onClick = {
+                            onNavigateToAuth()
+                        },
                         colors = ButtonDefaults.buttonColors(containerColor = Green20),
                         modifier = Modifier
                             .fillMaxWidth()
