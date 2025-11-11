@@ -32,6 +32,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
@@ -68,25 +69,24 @@ import studio.daily.minecraftlinker.feature.auth.viewmodel.AuthViewModelFactory
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AuthScreen(
-    onBack: () -> Unit
+    onBack: () -> Unit,
+    onLoginSuccess: () -> Unit,
 ) {
     val context = LocalContext.current
     val uuidStore = remember { UuidStore(context) }
     val viewModel: AuthViewModel = viewModel(
         factory = AuthViewModelFactory(uuidStore)
     )
+
     val code by viewModel.authCode.collectAsState()
     val isValid by viewModel.isCodeValid.collectAsState()
-
     val uuid by viewModel.uuid.collectAsState()
     val error by viewModel.error.collectAsState()
 
-    uuid?.let {
-
-    }
-
-    error?.let {
-
+    LaunchedEffect(uuid) {
+        if(!uuid.isNullOrBlank()) {
+            onLoginSuccess()
+        }
     }
 
     Scaffold(
