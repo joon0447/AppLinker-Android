@@ -16,6 +16,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBars
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
@@ -33,10 +34,12 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import studio.daily.minecraftlinker.core.datastore.UuidStore
+import studio.daily.minecraftlinker.core.network.server.ServerResponse
 import studio.daily.minecraftlinker.feature.home.login.model.MinecraftProfile
 import studio.daily.minecraftlinker.feature.home.login.viewmodel.HomeUiState
 import studio.daily.minecraftlinker.feature.home.login.viewmodel.HomeViewModel
@@ -97,6 +100,9 @@ fun HomeScreen() {
                         onRefresh = {
                             viewModel.refresh()
                         }
+                    )
+                    ServerInfo(
+                        playersCount = serverResponse!!.count
                     )
                 }
             }
@@ -161,6 +167,46 @@ private fun Header(
             Spacer(Modifier.height(24.dp))
             Button(onClick = onRefresh) {
                 Text("새로고침")
+            }
+        }
+    }
+}
+
+@Composable
+private fun ServerInfo(
+    playersCount: Int
+) {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(24.dp)
+    ) {
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp)
+                .background(Color(0xFFCCCCCC),
+                    shape = RoundedCornerShape(12.dp)),
+            contentAlignment = Alignment.Center
+        ) {
+            Column(
+                modifier = Modifier
+                    .padding(16.dp),
+                verticalArrangement = Arrangement.spacedBy(4.dp),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Text(
+                    text = "현재 서버 접속 인원",
+                    fontWeight = FontWeight.SemiBold,
+                    fontSize = 12.sp,
+                    color = Color(0xFF6B7280)
+                )
+                Text(
+                    text = playersCount.toString(),
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 20.sp,
+                    color = Color.Black
+                )
             }
         }
     }
