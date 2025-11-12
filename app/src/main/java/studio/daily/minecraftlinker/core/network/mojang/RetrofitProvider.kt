@@ -1,4 +1,4 @@
-package studio.daily.minecraftlinker.core.network
+package studio.daily.minecraftlinker.core.network.mojang
 
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient

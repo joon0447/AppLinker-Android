@@ -1,6 +1,5 @@
-package studio.daily.minecraftlinker.core.network
+package studio.daily.minecraftlinker.core.network.mojang
 
-import androidx.compose.ui.text.style.Hyphens
 import com.google.gson.annotations.SerializedName
 import retrofit2.http.GET
 import retrofit2.http.Path
