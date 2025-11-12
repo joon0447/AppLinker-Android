@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.google.gson.Gson
 import studio.daily.minecraftlinker.core.datastore.UuidStore
-import studio.daily.minecraftlinker.core.network.RetrofitProvider
+import studio.daily.minecraftlinker.core.network.mojang.RetrofitProvider
 import studio.daily.minecraftlinker.feature.home.login.repository.HomeRepository
 
 class HomeViewModelFactory(
