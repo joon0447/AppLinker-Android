@@ -1,12 +1,20 @@
 package studio.daily.minecraftlinker.feature.home.login.view
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.statusBars
+import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
@@ -16,6 +24,8 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
@@ -33,6 +43,7 @@ fun HomeScreen() {
     val context = LocalContext.current
     val viewModel: HomeViewModel = viewModel(factory = HomeViewModelFactory(UuidStore(context)))
     val state by viewModel.uiState.collectAsState()
+    val statusBarHeight = WindowInsets.statusBars.asPaddingValues().calculateTopPadding()
 
     Box(
         modifier = Modifier.fillMaxSize(),
@@ -65,32 +76,46 @@ fun HomeScreen() {
                 Column(
                     modifier = Modifier
                         .fillMaxWidth()
+                        .background(
+                            brush = Brush.verticalGradient(
+                                colors = listOf(
+                                    Color(0xFF8B5CF6),
+                                    Color(0xFF06B6D4)
+                                )
+                            )
+                        )
+                        .padding(top = statusBarHeight)
                         .align(Alignment.TopCenter),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-
-                    Text(
-                        text = s.profile.name,
-                        style = MaterialTheme.typography.headlineSmall,
-                        fontWeight = FontWeight.Bold
-                    )
-                    Spacer(Modifier.height(16.dp))
-
-                    if (s.profile.skinUrl != null) {
-                        AsyncImage(
-                            model = ImageRequest.Builder(context)
-                                .data(s.profile.skinUrl)
-                                .crossfade(true)
-                                .build(),
-                            contentDescription = "플레이어 스킨",
-                            modifier = Modifier.size(200.dp),
-                            contentScale = ContentScale.Crop
+                    Row (
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(16.dp),
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.Center,
+                    ) {
+                        if (s.profile.skinUrl != null) {
+                            AsyncImage(
+                                model = ImageRequest.Builder(context)
+                                    .data(s.profile.skinUrl)
+                                    .crossfade(true)
+                                    .build(),
+                                contentDescription = "플레이어 스킨",
+                                modifier = Modifier.size(60.dp),
+                                contentScale = ContentScale.Crop
+                            )
+                        } else {
+                            Text("스킨이 없습니다.")
+                        }
+                        Spacer(Modifier.width(16.dp))
+                        Text(
+                            text = s.profile.name,
+                            style = MaterialTheme.typography.headlineSmall,
+                            color = Color.White,
+                            fontWeight = FontWeight.Bold
                         )
-                    } else {
-                        Text("스킨이 설정되어 있지 않아요. 🤔")
                     }
-
-                    Spacer(Modifier.height(24.dp))
                     Button(onClick = { viewModel.refresh() }) {
                         Text("새로고침")
                     }
