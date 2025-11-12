@@ -1,15 +1,12 @@
 package studio.daily.minecraftlinker.feature.home.login.repository
 
 import android.net.http.HttpException
-import com.google.gson.Gson
-import com.google.gson.JsonSyntaxException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import okhttp3.Dispatcher
-import studio.daily.minecraftlinker.core.network.MojangApi
-import studio.daily.minecraftlinker.core.network.TexturesPayload
+import studio.daily.minecraftlinker.core.network.mojang.MojangApi
+import studio.daily.minecraftlinker.core.network.mojang.RetrofitProvider
+import studio.daily.minecraftlinker.core.network.server.ServerResponse
 import studio.daily.minecraftlinker.feature.home.login.model.MinecraftProfile
-import android.util.Base64
 
 class HomeRepository(
     private val mojangApi: MojangApi,
