@@ -122,6 +122,8 @@ fun HomeScreen() {
                         context = LocalContext.current,
                         onRefresh = {
                             viewModel.refresh()
+                            serverViewModel.loadPlayers()
+                            friendViewModel.loadFriends()
                         }
                     )
                     ServerInfo(
