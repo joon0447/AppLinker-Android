@@ -10,12 +10,14 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import studio.daily.minecraftlinker.core.datastore.UuidStore
+import studio.daily.minecraftlinker.core.network.server.ServerAPI
 import studio.daily.minecraftlinker.feature.home.login.model.MinecraftProfile
 import studio.daily.minecraftlinker.feature.home.login.repository.HomeRepository
 
 class FriendViewModel(
     private val uuidStore: UuidStore,
-    private val repository: HomeRepository
+    private val repository: HomeRepository,
+    private val serverAPI: ServerAPI
 ) : ViewModel() {
     private val db = FirebaseFirestore.getInstance()
 
@@ -53,9 +55,15 @@ class FriendViewModel(
                     val friends = snapshot.get("friends") as? List<String> ?: emptyList()
                     _friendUuids.value = friends
 
+                    val serverResponse = serverAPI.getPlayers()
+                    val onlineUuids = serverResponse.uuids.toSet()
+
                     val profiles = friends.mapNotNull { friendUuid ->
                         try{
-                            repository.fetchProfile(friendUuid)
+                            val profile = repository.fetchProfile(friendUuid)
+                            profile.copy(
+                                isOnline = onlineUuids.contains(friendUuid)
+                            )
                         }catch(e: Exception) {
                             Log.e("FriendViewModel", "프로필 가져오기 실패: $friendUuid", e)
                             null
