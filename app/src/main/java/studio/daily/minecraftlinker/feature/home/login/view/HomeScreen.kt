@@ -69,7 +69,8 @@ fun HomeScreen() {
     val friendViewModel: FriendViewModel = viewModel(
         factory = FriendViewModelFactory(
             uuidStore = UuidStore(context),
-            repository = HomeRepository(RetrofitProvider.mojangApi)
+            repository = HomeRepository(RetrofitProvider.mojangApi),
+            serverAPI = studio.daily.minecraftlinker.core.network.server.RetrofitProvider.serverAPI
         )
     )
     val friends by friendViewModel.friendUuids.collectAsState()
@@ -277,8 +278,13 @@ private fun FriendsList(
                             contentScale = ContentScale.Crop
                         )
                         Spacer(Modifier.width(12.dp))
-                        Column() {
+                        Column {
                             Text(profile.name, fontWeight = FontWeight.Medium, fontSize = 14.sp)
+                            Text(
+                                text = if(profile.isOnline) "온라인" else "오프라인",
+                                fontWeight = FontWeight.Normal,
+                                color = if(profile.isOnline) Color.Green else Color.Gray
+                            )
                         }
 
                     }
