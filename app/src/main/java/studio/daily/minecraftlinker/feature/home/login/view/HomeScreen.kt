@@ -1,7 +1,9 @@
 package studio.daily.minecraftlinker.feature.home.login.view
 
 import android.content.Context
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -16,6 +18,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBars
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
@@ -39,8 +43,13 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import studio.daily.minecraftlinker.core.datastore.UuidStore
+import studio.daily.minecraftlinker.core.network.mojang.MojangApi
+import studio.daily.minecraftlinker.core.network.mojang.RetrofitProvider
 import studio.daily.minecraftlinker.core.network.server.ServerResponse
 import studio.daily.minecraftlinker.feature.home.login.model.MinecraftProfile
+import studio.daily.minecraftlinker.feature.home.login.repository.HomeRepository
+import studio.daily.minecraftlinker.feature.home.login.viewmodel.FriendViewModel
+import studio.daily.minecraftlinker.feature.home.login.viewmodel.FriendViewModelFactory
 import studio.daily.minecraftlinker.feature.home.login.viewmodel.HomeUiState
 import studio.daily.minecraftlinker.feature.home.login.viewmodel.HomeViewModel
 import studio.daily.minecraftlinker.feature.home.login.viewmodel.HomeViewModelFactory
@@ -49,17 +58,30 @@ import studio.daily.minecraftlinker.feature.home.login.viewmodel.ServerViewModel
 @Composable
 fun HomeScreen() {
     val context = LocalContext.current
+    val statusBarHeight = WindowInsets.statusBars.asPaddingValues().calculateTopPadding()
+
     val viewModel: HomeViewModel = viewModel(factory = HomeViewModelFactory(UuidStore(context)))
     val state by viewModel.uiState.collectAsState()
 
     val serverViewModel: ServerViewModel = viewModel()
     val serverResponse by serverViewModel.serverResponse.collectAsState()
 
-    val statusBarHeight = WindowInsets.statusBars.asPaddingValues().calculateTopPadding()
+    val friendViewModel: FriendViewModel = viewModel(
+        factory = FriendViewModelFactory(
+            uuidStore = UuidStore(context),
+            repository = HomeRepository(RetrofitProvider.mojangApi)
+        )
+    )
+    val friends by friendViewModel.friendUuids.collectAsState()
+    val friendProfiles by friendViewModel.friendProfiles.collectAsState()
+    val isLoading by friendViewModel.isLoading.collectAsState()
+    val error by friendViewModel.error.collectAsState()
 
     LaunchedEffect(Unit) {
         serverViewModel.loadPlayers()
+        friendViewModel.loadFriends()
     }
+
 
     Box(
         modifier = Modifier.fillMaxSize(),
@@ -103,6 +125,10 @@ fun HomeScreen() {
                     )
                     ServerInfo(
                         playersCount = serverResponse!!.count
+                    )
+                    FriendsList(
+                        friends = friends,
+                        profiles = friendProfiles
                     )
                 }
             }
@@ -210,4 +236,55 @@ private fun ServerInfo(
             }
         }
     }
+}
+
+@Composable
+private fun FriendsList(
+    friends: List<String>,
+    profiles: List<MinecraftProfile>
+) {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(24.dp)
+    ) {
+        Text("친구 목록", style = MaterialTheme.typography.titleMedium)
+        Spacer(Modifier.height(8.dp))
+
+        if (profiles.isEmpty()) {
+            Text("친구가 없습니다.")
+        } else {
+            LazyColumn {
+                items(profiles) { profile ->
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .background(
+                                color = Color(0xFFF8FAFC),
+                                shape = RoundedCornerShape(12.dp)
+                            )
+                            .border(
+                                BorderStroke(1.dp, Color(0xFFE5E7EB)),
+                                shape = RoundedCornerShape(12.dp)
+                            )
+                            .padding(24.dp)
+                    ) {
+                        AsyncImage(
+                            model = profile.skinUrl,
+                            contentDescription = null,
+                            modifier = Modifier.size(48.dp),
+                            contentScale = ContentScale.Crop
+                        )
+                        Spacer(Modifier.width(12.dp))
+                        Column() {
+                            Text(profile.name, fontWeight = FontWeight.Medium, fontSize = 14.sp)
+                        }
+
+                    }
+                }
+            }
+        }
+    }
+
 }
