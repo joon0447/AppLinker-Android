@@ -64,6 +64,13 @@ import studio.daily.minecraftlinker.feature.home.login.viewmodel.HomeUiState
 import studio.daily.minecraftlinker.feature.home.login.viewmodel.HomeViewModel
 import studio.daily.minecraftlinker.feature.home.login.viewmodel.HomeViewModelFactory
 import studio.daily.minecraftlinker.feature.home.login.viewmodel.ServerViewModel
+import studio.daily.minecraftlinker.ui.theme.Blue40
+import studio.daily.minecraftlinker.ui.theme.Blue60
+import studio.daily.minecraftlinker.ui.theme.DarkBlue80
+import studio.daily.minecraftlinker.ui.theme.Gray60
+import studio.daily.minecraftlinker.ui.theme.Gray80
+import studio.daily.minecraftlinker.ui.theme.Green40
+import studio.daily.minecraftlinker.ui.theme.Purple60
 
 @Composable
 fun HomeScreen() {
@@ -143,7 +150,7 @@ fun HomeScreen() {
                         friends = friends,
                         profiles = friendProfiles
                     )
-                    CheckIn()
+                    CompleteCheckIn()
                 }
             }
         }
@@ -163,8 +170,8 @@ private fun Header(
             .background(
                 brush = Brush.verticalGradient(
                     colors = listOf(
-                        Color(0xFF8B5CF6),
-                        Color(0xFF06B6D4)
+                        Purple60,
+                        Blue40
                     )
                 )
             )
@@ -225,7 +232,8 @@ private fun ServerInfo(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(16.dp)
-                .background(Color(0xFFCCCCCC),
+                .background(
+                    Gray60,
                     shape = RoundedCornerShape(12.dp)),
             contentAlignment = Alignment.Center
         ) {
@@ -239,7 +247,7 @@ private fun ServerInfo(
                     text = "현재 서버 접속 인원",
                     fontWeight = FontWeight.SemiBold,
                     fontSize = 12.sp,
-                    color = Color(0xFF6B7280)
+                    color = Gray80
                 )
                 Text(
                     text = playersCount.toString(),
@@ -322,12 +330,7 @@ private fun CheckIn() {
                 .fillMaxWidth()
                 .clip(RoundedCornerShape(16.dp))
                 .background(
-                    brush = Brush.verticalGradient(
-                        listOf(
-                            Color(0xFF0F172A),
-                            Color(0xFF1E293B)
-                        )
-                    )
+                    color = DarkBlue80
                 )
                 .padding(24.dp)
         ) {
@@ -338,7 +341,7 @@ private fun CheckIn() {
                 Box(
                     modifier = Modifier
                         .size(64.dp)
-                        .background(Color(0xFF38BDF8), shape = CircleShape),
+                        .background(Blue60, shape = CircleShape),
                     contentAlignment = Alignment.Center
                 ) {
                     Image(
@@ -358,7 +361,7 @@ private fun CheckIn() {
                 Text(
                     text = "다이아몬드 3개",
                     style = MaterialTheme.typography.titleMedium.copy(
-                        color = Color(0xFF38BDF8),
+                        color = Blue40,
                         fontWeight = FontWeight.Bold
                     )
                 )
@@ -368,7 +371,7 @@ private fun CheckIn() {
                 Button(
                     onClick = { },
                     colors = ButtonDefaults.buttonColors(
-                        containerColor = Color(0xFF10B981),
+                        containerColor = Green40,
                         contentColor = Color.White
                     ),
                     shape = RoundedCornerShape(12.dp)
@@ -394,12 +397,7 @@ private fun CompleteCheckIn() {
                 .fillMaxWidth()
                 .clip(RoundedCornerShape(16.dp))
                 .background(
-                    brush = Brush.verticalGradient(
-                        listOf(
-                            Color(0xFF0F172A),
-                            Color(0xFF1E293B)
-                        )
-                    )
+                    color = DarkBlue80
                 )
                 .padding(24.dp)
         ) {
@@ -410,7 +408,7 @@ private fun CompleteCheckIn() {
                 Box(
                     modifier = Modifier
                         .size(64.dp)
-                        .background(Color(0xFF38BDF8), shape = CircleShape),
+                        .background(Blue40, shape = CircleShape),
                     contentAlignment = Alignment.Center
                 ) {
                     Image(
@@ -440,7 +438,7 @@ private fun CompleteCheckIn() {
                 Button(
                     onClick = { },
                     colors = ButtonDefaults.buttonColors(
-                        containerColor = Color(0xFF10B981),
+                        containerColor = Green40,
                         contentColor = Color.White
                     ),
                     shape = RoundedCornerShape(12.dp)

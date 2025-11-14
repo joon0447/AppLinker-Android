@@ -65,6 +65,11 @@ import studio.daily.minecraftlinker.R
 import studio.daily.minecraftlinker.core.datastore.UuidStore
 import studio.daily.minecraftlinker.feature.auth.viewmodel.AuthViewModel
 import studio.daily.minecraftlinker.feature.auth.viewmodel.AuthViewModelFactory
+import studio.daily.minecraftlinker.ui.theme.Blue20
+import studio.daily.minecraftlinker.ui.theme.Brown60
+import studio.daily.minecraftlinker.ui.theme.Gray80
+import studio.daily.minecraftlinker.ui.theme.Orange20
+import studio.daily.minecraftlinker.ui.theme.Yellow20
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -279,10 +284,10 @@ private fun HelpContainer() {
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .background(color = Color(0xFFFEF3C7), shape = RoundedCornerShape(8.dp))
+            .background(color = Yellow20, shape = RoundedCornerShape(8.dp))
             .border(
                 width = 1.dp,
-                color = Color(0xFFF59E0B),
+                color = Orange20,
                 shape = RoundedCornerShape(8.dp)
             )
             .padding(16.dp)
@@ -301,14 +306,14 @@ private fun HelpContainer() {
                     text = "도움말",
                     fontSize = 14.sp,
                     fontWeight = FontWeight.Bold,
-                    color = Color(0xFF92400E)
+                    color = Brown60
                 )
             }
             Text(
                 text = "- 코드는 24시간 후 만료됩니다.",
                 fontSize = 13.sp,
                 fontWeight = FontWeight.SemiBold,
-                color = Color(0xFF92400E)
+                color = Brown60
             )
         }
     }
@@ -327,7 +332,7 @@ private fun ConnectButton(
             .height(48.dp),
         shape = RoundedCornerShape(12.dp),
         colors = ButtonDefaults.buttonColors(
-            containerColor = if (enabled) Color(0xFF7C83FF) else Color(0xFFBFC3FF),
+            containerColor = if (enabled) Blue20 else Gray80,
             contentColor = Color.White
         ),
         elevation = ButtonDefaults.buttonElevation(defaultElevation = 0.dp)
@@ -338,5 +343,4 @@ private fun ConnectButton(
             fontSize = 16.sp
         )
     }
-
 }
