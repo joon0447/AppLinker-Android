@@ -4,6 +4,7 @@ import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import studio.daily.minecraftlinker.core.constant.Server
 
 
 object ServerRetrofitProvider {
@@ -13,7 +14,7 @@ object ServerRetrofitProvider {
 
     private val retrofit by lazy {
         Retrofit.Builder()
-            .baseUrl("http://10.0.2.2:8000/")
+            .baseUrl(Server.notebookIp)
             .client(OkHttpClient.Builder().build())
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
