@@ -24,12 +24,9 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -53,9 +50,8 @@ import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import studio.daily.minecraftlinker.R
 import studio.daily.minecraftlinker.core.datastore.UuidStore
-import studio.daily.minecraftlinker.core.network.mojang.MojangApi
-import studio.daily.minecraftlinker.core.network.mojang.RetrofitProvider
-import studio.daily.minecraftlinker.core.network.server.ServerResponse
+import studio.daily.minecraftlinker.core.network.mojang.MojangRetrofitProvider
+import studio.daily.minecraftlinker.core.network.server.ServerRetrofitProvider
 import studio.daily.minecraftlinker.feature.home.login.model.MinecraftProfile
 import studio.daily.minecraftlinker.feature.home.login.repository.HomeRepository
 import studio.daily.minecraftlinker.feature.home.login.viewmodel.FriendViewModel
@@ -86,8 +82,8 @@ fun HomeScreen() {
     val friendViewModel: FriendViewModel = viewModel(
         factory = FriendViewModelFactory(
             uuidStore = UuidStore(context),
-            repository = HomeRepository(RetrofitProvider.mojangApi),
-            serverAPI = studio.daily.minecraftlinker.core.network.server.RetrofitProvider.serverAPI
+            repository = HomeRepository(MojangRetrofitProvider.mojangApi),
+            serverAPI = ServerRetrofitProvider.serverAPI
         )
     )
     val friends by friendViewModel.friendUuids.collectAsState()

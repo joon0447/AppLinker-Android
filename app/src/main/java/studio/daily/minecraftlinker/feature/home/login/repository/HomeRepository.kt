@@ -4,8 +4,6 @@ import android.net.http.HttpException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import studio.daily.minecraftlinker.core.network.mojang.MojangApi
-import studio.daily.minecraftlinker.core.network.mojang.RetrofitProvider
-import studio.daily.minecraftlinker.core.network.server.ServerResponse
 import studio.daily.minecraftlinker.feature.home.login.model.MinecraftProfile
 
 class HomeRepository(
