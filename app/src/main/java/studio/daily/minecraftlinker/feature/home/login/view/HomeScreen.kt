@@ -165,6 +165,7 @@ fun HomeScreen() {
                             CheckIn(onClick = {
                                 uuid?.let { uuid ->
                                     serverViewModel.checkIn(uuid)
+                                    rewardViewModel.setReceivedReward()
                                 }
                             })
                         }

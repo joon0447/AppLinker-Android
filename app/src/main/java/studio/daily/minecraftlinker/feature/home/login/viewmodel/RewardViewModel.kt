@@ -24,4 +24,8 @@ class RewardViewModel(
             }
         }
     }
+
+    fun setReceivedReward() {
+        _canReceiveToday.value = false
+    }
 }
