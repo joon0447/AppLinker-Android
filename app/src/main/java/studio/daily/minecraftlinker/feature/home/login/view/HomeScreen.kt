@@ -463,8 +463,8 @@ private fun CompleteCheckIn() {
                 Button(
                     onClick = { },
                     colors = ButtonDefaults.buttonColors(
-                        containerColor = Green40,
-                        contentColor = Color.White
+                        containerColor = Color.DarkGray,
+                        contentColor = Color.Gray
                     ),
                     shape = RoundedCornerShape(12.dp)
                 ) {
