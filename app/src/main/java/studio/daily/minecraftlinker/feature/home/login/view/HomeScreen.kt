@@ -73,8 +73,9 @@ fun HomeScreen() {
     val context = LocalContext.current
     val statusBarHeight = WindowInsets.statusBars.asPaddingValues().calculateTopPadding()
 
-    val viewModel: HomeViewModel = viewModel(factory = HomeViewModelFactory(UuidStore(context)))
-    val state by viewModel.uiState.collectAsState()
+    val homeViewModel: HomeViewModel = viewModel(factory = HomeViewModelFactory(UuidStore(context)))
+    val state by homeViewModel.uiState.collectAsState()
+    val uuid by homeViewModel.uuid.collectAsState()
 
     val serverViewModel: ServerViewModel = viewModel()
     val serverResponse by serverViewModel.serverResponse.collectAsState()
@@ -88,8 +89,7 @@ fun HomeScreen() {
     )
     val friends by friendViewModel.friendUuids.collectAsState()
     val friendProfiles by friendViewModel.friendProfiles.collectAsState()
-    val isLoading by friendViewModel.isLoading.collectAsState()
-    val error by friendViewModel.error.collectAsState()
+
 
     LaunchedEffect(Unit) {
         serverViewModel.loadPlayers()
@@ -116,7 +116,7 @@ fun HomeScreen() {
                         text = "로딩 실패: ${s.message}"
                     )
                     Spacer(Modifier.height(12.dp))
-                    Button(onClick = { viewModel.refresh() }) {
+                    Button(onClick = { homeViewModel.refresh() }) {
                         Text(
                             text = "다시 시도"
                         )
@@ -134,7 +134,7 @@ fun HomeScreen() {
                         statusBarHeight = statusBarHeight,
                         context = LocalContext.current,
                         onRefresh = {
-                            viewModel.refresh()
+                            homeViewModel.refresh()
                             serverViewModel.loadPlayers()
                             friendViewModel.loadFriends()
                         }
@@ -148,7 +148,11 @@ fun HomeScreen() {
                         friends = friends,
                         profiles = friendProfiles
                     )
-                    CompleteCheckIn()
+                    CheckIn(onClick = {
+                        uuid?.let { uuid ->
+                            serverViewModel.checkIn(uuid)
+                        }
+                    })
                 }
             }
         }
@@ -232,7 +236,8 @@ private fun ServerInfo(
                 .padding(16.dp)
                 .background(
                     Gray60,
-                    shape = RoundedCornerShape(12.dp)),
+                    shape = RoundedCornerShape(12.dp)
+                ),
             contentAlignment = Alignment.Center
         ) {
             Column(
@@ -300,9 +305,9 @@ private fun FriendsList(
                         Column {
                             Text(profile.name, fontWeight = FontWeight.Medium, fontSize = 14.sp)
                             Text(
-                                text = if(profile.isOnline) "온라인" else "오프라인",
+                                text = if (profile.isOnline) "온라인" else "오프라인",
                                 fontWeight = FontWeight.Normal,
-                                color = if(profile.isOnline) Color.Green else Color.Gray
+                                color = if (profile.isOnline) Color.Green else Color.Gray
                             )
                         }
 
@@ -315,12 +320,14 @@ private fun FriendsList(
 }
 
 @Composable
-private fun CheckIn() {
-    Column (
+private fun CheckIn(
+    onClick: () -> Unit
+) {
+    Column(
         modifier = Modifier
             .fillMaxWidth()
             .padding(24.dp)
-    ){
+    ) {
         Text("일일 출석", style = MaterialTheme.typography.titleMedium)
         Spacer(Modifier.height(8.dp))
         Box(
@@ -335,7 +342,7 @@ private fun CheckIn() {
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 modifier = Modifier.fillMaxWidth()
-            ){
+            ) {
                 Box(
                     modifier = Modifier
                         .size(64.dp)
@@ -367,7 +374,9 @@ private fun CheckIn() {
                 Spacer(Modifier.height(16.dp))
 
                 Button(
-                    onClick = { },
+                    onClick = {
+                        onClick()
+                    },
                     colors = ButtonDefaults.buttonColors(
                         containerColor = Green40,
                         contentColor = Color.White
@@ -383,11 +392,11 @@ private fun CheckIn() {
 
 @Composable
 private fun CompleteCheckIn() {
-    Column (
+    Column(
         modifier = Modifier
             .fillMaxWidth()
             .padding(24.dp)
-    ){
+    ) {
         Text("일일 출석", style = MaterialTheme.typography.titleMedium)
         Spacer(Modifier.height(8.dp))
         Box(
@@ -402,7 +411,7 @@ private fun CompleteCheckIn() {
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 modifier = Modifier.fillMaxWidth()
-            ){
+            ) {
                 Box(
                     modifier = Modifier
                         .size(64.dp)
