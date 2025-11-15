@@ -26,20 +26,26 @@ class HomeViewModel(
     private val _uiState = MutableStateFlow<HomeUiState>(HomeUiState.Idle)
     var uiState: StateFlow<HomeUiState> = _uiState
 
-    init { refresh() }
+    private val _uuid = MutableStateFlow<String?>(null)
+    val uuid: StateFlow<String?> = _uuid
+
+    init {
+        refresh()
+    }
 
     fun refresh() {
         viewModelScope.launch {
             _uiState.value = HomeUiState.Loading
-            try{
+            try {
                 val uuid = uuidStore.uuidFlow.first()
-                if(uuid.isNullOrBlank()) {
+                if (uuid.isNullOrBlank()) {
                     _uiState.value = HomeUiState.Error("UUID가 없습니다.")
                     return@launch
                 }
+                _uuid.value = uuid
                 val profile = repository.fetchProfile(uuid)
                 _uiState.value = HomeUiState.Success(profile)
-            } catch(t: Throwable) {
+            } catch (t: Throwable) {
                 _uiState.value = HomeUiState.Error(t.message ?: "오류")
             }
         }

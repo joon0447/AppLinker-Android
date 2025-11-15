@@ -25,4 +25,14 @@ class ServerViewModel: ViewModel() {
             }
         }
     }
+
+    fun checkIn(uuid: String) {
+        viewModelScope.launch {
+            try{
+                val response = repository.checkIn(uuid)
+            }catch(e: Exception) {
+                println("API 에러 : ${e.message}")
+            }
+        }
+    }
 }
