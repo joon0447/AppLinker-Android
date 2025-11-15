@@ -59,6 +59,7 @@ import studio.daily.minecraftlinker.feature.home.login.viewmodel.FriendViewModel
 import studio.daily.minecraftlinker.feature.home.login.viewmodel.HomeUiState
 import studio.daily.minecraftlinker.feature.home.login.viewmodel.HomeViewModel
 import studio.daily.minecraftlinker.feature.home.login.viewmodel.HomeViewModelFactory
+import studio.daily.minecraftlinker.feature.home.login.viewmodel.RewardViewModel
 import studio.daily.minecraftlinker.feature.home.login.viewmodel.ServerViewModel
 import studio.daily.minecraftlinker.ui.theme.Blue40
 import studio.daily.minecraftlinker.ui.theme.Blue60
@@ -89,6 +90,9 @@ fun HomeScreen() {
     )
     val friends by friendViewModel.friendUuids.collectAsState()
     val friendProfiles by friendViewModel.friendProfiles.collectAsState()
+
+    val rewardViewModel: RewardViewModel = viewModel()
+    val canReceiveToday by rewardViewModel.canReceiveToday.collectAsState()
 
 
     LaunchedEffect(Unit) {
@@ -125,6 +129,13 @@ fun HomeScreen() {
             }
 
             is HomeUiState.Success -> {
+                LaunchedEffect(uuid) {
+                    uuid?.let { uuid ->
+                        if(uuid.isNotBlank()) {
+                            rewardViewModel.loadRewardStatus(uuid)
+                        }
+                    }
+                }
                 Column(
                     modifier = Modifier
                         .fillMaxSize()
@@ -148,11 +159,17 @@ fun HomeScreen() {
                         friends = friends,
                         profiles = friendProfiles
                     )
-                    CheckIn(onClick = {
-                        uuid?.let { uuid ->
-                            serverViewModel.checkIn(uuid)
+                    when(canReceiveToday) {
+                        null -> CircularProgressIndicator()
+                        true -> {
+                            CheckIn(onClick = {
+                                uuid?.let { uuid ->
+                                    serverViewModel.checkIn(uuid)
+                                }
+                            })
                         }
-                    })
+                        false -> CompleteCheckIn()
+                    }
                 }
             }
         }
