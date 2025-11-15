@@ -139,9 +139,11 @@ fun HomeScreen() {
                             friendViewModel.loadFriends()
                         }
                     )
-                    ServerInfo(
-                        playersCount = serverResponse!!.count
-                    )
+                    serverResponse?.let { response ->
+                        ServerInfo(
+                            playersCount = response.count
+                        )
+                    }
                     FriendsList(
                         friends = friends,
                         profiles = friendProfiles

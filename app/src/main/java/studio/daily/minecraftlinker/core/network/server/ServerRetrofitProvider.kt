@@ -14,7 +14,7 @@ object ServerRetrofitProvider {
 
     private val retrofit by lazy {
         Retrofit.Builder()
-            .baseUrl(Server.notebookIp)
+            .baseUrl(Server.serverIp)
             .client(OkHttpClient.Builder().build())
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
