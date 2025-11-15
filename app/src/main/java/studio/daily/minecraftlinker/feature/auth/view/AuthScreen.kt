@@ -26,7 +26,6 @@ import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -53,11 +52,11 @@ import androidx.compose.ui.input.key.type
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -103,7 +102,8 @@ fun AuthScreen(
                     }) {
                         Icon(
                             imageVector = Icons.AutoMirrored.Rounded.ArrowBack,
-                            contentDescription = "뒤로"
+                            contentDescription = "뒤로",
+                            tint = Color.Black
                         )
                     }
                 },
@@ -159,6 +159,7 @@ fun AuthScreen(
                     Text(
                         text = "서버에 연결하세요",
                         fontSize = 24.sp,
+                        color = Color.Black,
                         fontWeight = FontWeight.Bold,
                         textAlign = TextAlign.Center
                     )
@@ -167,6 +168,7 @@ fun AuthScreen(
                         text = "서버 연결 코드를 입력하면\n" +
                                 "마인크래프트 서버와 연동할 수 있습니다.",
                         fontSize = 16.sp,
+                        color = Color.Black,
                         fontWeight = FontWeight.Normal,
                         textAlign = TextAlign.Center
                     )
@@ -180,17 +182,10 @@ fun AuthScreen(
                     .fillMaxWidth()
                     .padding(horizontal = 24.dp),
             ) {
-                Column() {
-                    Text(
-                        text = "서버에 연결하세요",
-                        fontSize = 24.sp,
-                        fontWeight = FontWeight.Bold,
-                        textAlign = TextAlign.Center
-                    )
-                    Spacer(Modifier.height(8.dp))
+                Column {
                     Text(
                         text = "서버에서 받은 6자리 코드를 입력해주세요.",
-                        fontSize = 14.sp,
+                        fontSize = 18.sp,
                         fontWeight = FontWeight.Normal,
                         color = Color.Gray,
                         textAlign = TextAlign.Center
@@ -259,9 +254,10 @@ private fun VerificationCodeInput(
                         }
                     },
                 singleLine = true,
-                textStyle = LocalTextStyle.current.copy(
+                textStyle = TextStyle(
                     textAlign = TextAlign.Center,
-                    fontSize = 15.sp,
+                    fontSize = 12.sp,
+                    color = Color.Black,
                     fontWeight = FontWeight.Bold
                 ),
                 keyboardOptions = KeyboardOptions.Default.copy(
