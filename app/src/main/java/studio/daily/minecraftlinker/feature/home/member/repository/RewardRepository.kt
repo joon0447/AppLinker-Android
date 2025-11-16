@@ -1,4 +1,4 @@
-package studio.daily.minecraftlinker.feature.home.login.repository
+package studio.daily.minecraftlinker.feature.home.member.repository
 
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.tasks.await

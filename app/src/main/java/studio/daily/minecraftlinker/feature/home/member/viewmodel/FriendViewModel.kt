@@ -1,4 +1,4 @@
-package studio.daily.minecraftlinker.feature.home.login.viewmodel
+package studio.daily.minecraftlinker.feature.home.member.viewmodel
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
@@ -11,12 +11,12 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import studio.daily.minecraftlinker.core.datastore.UuidStore
 import studio.daily.minecraftlinker.core.network.server.ServerAPI
-import studio.daily.minecraftlinker.feature.home.login.model.MinecraftProfile
-import studio.daily.minecraftlinker.feature.home.login.repository.HomeRepository
+import studio.daily.minecraftlinker.feature.home.member.model.MinecraftProfile
+import studio.daily.minecraftlinker.feature.home.member.repository.ProfileRepository
 
 class FriendViewModel(
     private val uuidStore: UuidStore,
-    private val repository: HomeRepository,
+    private val repository: ProfileRepository,
     private val serverAPI: ServerAPI
 ) : ViewModel() {
     private val db = FirebaseFirestore.getInstance()

@@ -1,4 +1,4 @@
-package studio.daily.minecraftlinker.feature.home.login.model
+package studio.daily.minecraftlinker.feature.home.member.model
 
 data class MinecraftProfile (
     val id: String,

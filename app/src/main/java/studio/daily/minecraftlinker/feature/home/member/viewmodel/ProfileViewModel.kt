@@ -1,4 +1,4 @@
-package studio.daily.minecraftlinker.feature.home.login.viewmodel
+package studio.daily.minecraftlinker.feature.home.member.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -7,8 +7,8 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import studio.daily.minecraftlinker.core.datastore.UuidStore
-import studio.daily.minecraftlinker.feature.home.login.model.MinecraftProfile
-import studio.daily.minecraftlinker.feature.home.login.repository.HomeRepository
+import studio.daily.minecraftlinker.feature.home.member.model.MinecraftProfile
+import studio.daily.minecraftlinker.feature.home.member.repository.ProfileRepository
 
 
 sealed class HomeUiState {
@@ -20,7 +20,7 @@ sealed class HomeUiState {
 
 class HomeViewModel(
     private val uuidStore: UuidStore,
-    private val repository: HomeRepository
+    private val repository: ProfileRepository
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow<HomeUiState>(HomeUiState.Idle)

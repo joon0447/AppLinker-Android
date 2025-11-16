@@ -1,11 +1,11 @@
-package studio.daily.minecraftlinker.feature.home.login.viewmodel
+package studio.daily.minecraftlinker.feature.home.member.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
-import studio.daily.minecraftlinker.feature.home.login.repository.RewardRepository
+import studio.daily.minecraftlinker.feature.home.member.repository.RewardRepository
 
 class RewardViewModel(
     private val repository: RewardRepository = RewardRepository()

@@ -1,4 +1,4 @@
-package studio.daily.minecraftlinker.feature.home.login.view
+package studio.daily.minecraftlinker.feature.home.member.view
 
 
 import android.content.Context
@@ -52,15 +52,15 @@ import studio.daily.minecraftlinker.R
 import studio.daily.minecraftlinker.core.datastore.UuidStore
 import studio.daily.minecraftlinker.core.network.mojang.MojangRetrofitProvider
 import studio.daily.minecraftlinker.core.network.server.ServerRetrofitProvider
-import studio.daily.minecraftlinker.feature.home.login.model.MinecraftProfile
-import studio.daily.minecraftlinker.feature.home.login.repository.HomeRepository
-import studio.daily.minecraftlinker.feature.home.login.viewmodel.FriendViewModel
-import studio.daily.minecraftlinker.feature.home.login.viewmodel.FriendViewModelFactory
-import studio.daily.minecraftlinker.feature.home.login.viewmodel.HomeUiState
-import studio.daily.minecraftlinker.feature.home.login.viewmodel.HomeViewModel
-import studio.daily.minecraftlinker.feature.home.login.viewmodel.HomeViewModelFactory
-import studio.daily.minecraftlinker.feature.home.login.viewmodel.RewardViewModel
-import studio.daily.minecraftlinker.feature.home.login.viewmodel.ServerViewModel
+import studio.daily.minecraftlinker.feature.home.member.model.MinecraftProfile
+import studio.daily.minecraftlinker.feature.home.member.repository.ProfileRepository
+import studio.daily.minecraftlinker.feature.home.member.viewmodel.FriendViewModel
+import studio.daily.minecraftlinker.feature.home.member.viewmodel.FriendViewModelFactory
+import studio.daily.minecraftlinker.feature.home.member.viewmodel.HomeUiState
+import studio.daily.minecraftlinker.feature.home.member.viewmodel.HomeViewModel
+import studio.daily.minecraftlinker.feature.home.member.viewmodel.ProfileViewModelFactory
+import studio.daily.minecraftlinker.feature.home.member.viewmodel.RewardViewModel
+import studio.daily.minecraftlinker.feature.home.member.viewmodel.ServerViewModel
 import studio.daily.minecraftlinker.ui.theme.Blue40
 import studio.daily.minecraftlinker.ui.theme.Blue60
 import studio.daily.minecraftlinker.ui.theme.DarkBlue80
@@ -74,7 +74,7 @@ fun HomeScreen() {
     val context = LocalContext.current
     val statusBarHeight = WindowInsets.statusBars.asPaddingValues().calculateTopPadding()
 
-    val homeViewModel: HomeViewModel = viewModel(factory = HomeViewModelFactory(UuidStore(context)))
+    val homeViewModel: HomeViewModel = viewModel(factory = ProfileViewModelFactory(UuidStore(context)))
     val state by homeViewModel.uiState.collectAsState()
     val uuid by homeViewModel.uuid.collectAsState()
 
@@ -84,7 +84,7 @@ fun HomeScreen() {
     val friendViewModel: FriendViewModel = viewModel(
         factory = FriendViewModelFactory(
             uuidStore = UuidStore(context),
-            repository = HomeRepository(MojangRetrofitProvider.mojangApi),
+            repository = ProfileRepository(MojangRetrofitProvider.mojangApi),
             serverAPI = ServerRetrofitProvider.serverAPI
         )
     )

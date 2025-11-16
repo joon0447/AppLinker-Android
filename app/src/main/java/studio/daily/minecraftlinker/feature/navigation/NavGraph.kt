@@ -8,7 +8,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import studio.daily.minecraftlinker.feature.auth.view.AuthScreen
 import studio.daily.minecraftlinker.feature.home.guest.view.GuestScreen
-import studio.daily.minecraftlinker.feature.home.login.view.HomeScreen
+import studio.daily.minecraftlinker.feature.home.member.view.HomeScreen
 import studio.daily.minecraftlinker.feature.start.view.LoadingScreen
 import studio.daily.minecraftlinker.feature.start.viewmodel.MainViewModel
 import studio.daily.minecraftlinker.feature.start.viewmodel.MainViewModelFactory

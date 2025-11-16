@@ -1,12 +1,12 @@
-package studio.daily.minecraftlinker.feature.home.login.repository
+package studio.daily.minecraftlinker.feature.home.member.repository
 
 import android.net.http.HttpException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import studio.daily.minecraftlinker.core.network.mojang.MojangApi
-import studio.daily.minecraftlinker.feature.home.login.model.MinecraftProfile
+import studio.daily.minecraftlinker.feature.home.member.model.MinecraftProfile
 
-class HomeRepository(
+class ProfileRepository(
     private val mojangApi: MojangApi,
 ) {
 
