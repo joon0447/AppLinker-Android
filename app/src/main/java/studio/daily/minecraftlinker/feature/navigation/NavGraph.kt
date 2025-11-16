@@ -1,9 +1,9 @@
 package studio.daily.minecraftlinker.feature.navigation
 
-import androidx.navigation.NavHostController
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import studio.daily.minecraftlinker.feature.auth.view.AuthScreen
