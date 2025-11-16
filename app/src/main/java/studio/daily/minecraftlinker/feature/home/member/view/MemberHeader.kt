@@ -30,7 +30,8 @@ import studio.daily.minecraftlinker.feature.home.member.model.MinecraftProfile
 fun Header(
     profile: MinecraftProfile,
     statusBarHeight: Dp,
-    context: Context
+    context: Context,
+    onRefresh: () -> Unit
 ) {
     Row(
         modifier = Modifier
@@ -64,14 +65,29 @@ fun Header(
                 fontWeight = FontWeight.Bold
             )
         }
-        Image(
-            painter = painterResource(id = R.drawable.material_symbols_logout),
-            contentDescription = "로그아웃",
-            modifier = Modifier
-                .size(32.dp)
-                .clickable {
-                    // TODO 로그아웃 함수 구현하기
-                }
-        )
+        Row (
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(10.dp)
+        ){
+            Image(
+                painter = painterResource(id = R.drawable.material_symbols_refresh),
+                contentDescription = "새로고침",
+                modifier = Modifier
+                    .size(32.dp)
+                    .clickable {
+                        onRefresh()
+                    }
+            )
+            Image(
+                painter = painterResource(id = R.drawable.material_symbols_logout),
+                contentDescription = "로그아웃",
+                modifier = Modifier
+                    .size(32.dp)
+                    .clickable {
+                        // TODO 로그아웃 함수 구현하기
+                    }
+            )
+        }
+
     }
 }

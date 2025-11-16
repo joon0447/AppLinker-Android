@@ -95,7 +95,11 @@ fun HomeScreen() {
                     Header(
                         profile = s.profile,
                         statusBarHeight = statusBarHeight,
-                        context = LocalContext.current
+                        context = LocalContext.current,
+                        onRefresh = {
+                            serverViewModel.loadPlayers()
+                            friendViewModel.loadFriends()
+                        }
                     )
                     serverResponse?.let { response ->
                         ServerInfo(playersCount = response.count)
