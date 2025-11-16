@@ -42,150 +42,65 @@ import studio.daily.minecraftlinker.ui.theme.Green20
 fun GuestScreen(
     onNavigateToAuth: () -> Unit
 ) {
-
-    val statusBarHeight = WindowInsets.statusBars.asPaddingValues().calculateTopPadding()
-    Column(
+    Box(
         modifier = Modifier
             .fillMaxSize()
-            .navigationBarsPadding()
+            .background(Color.White)
     ) {
-        Box(
+        Column(
             modifier = Modifier
-                .fillMaxWidth()
-                .background(Blue20)
-                .padding(top = statusBarHeight),
-            contentAlignment = Alignment.Center
-        ) {
-            Column {
-                Spacer(modifier = Modifier.height(24.dp))
-                Column(
-                    modifier = Modifier
-                        .padding(horizontal = 24.dp)
-                        .background(Color.White, shape = RoundedCornerShape(16.dp))
-                        .padding(vertical = 32.dp, horizontal = 24.dp)
-                        .fillMaxWidth(),
-                    horizontalAlignment = Alignment.CenterHorizontally
-                ) {
-                    Text(
-                        text = "로그인",
-                        fontSize = 24.sp,
-                        fontWeight = FontWeight.Bold,
-                        color = Color.Black,
-                        textAlign = TextAlign.Center
-                    )
+                .fillMaxSize()
+                .padding(10.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center,
 
-                    Spacer(modifier = Modifier.height(20.dp))
-
-                    Button(
-                        onClick = {
-                            onNavigateToAuth()
-                        },
-                        colors = ButtonDefaults.buttonColors(containerColor = Green20),
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(48.dp)
-                    ) {
-                        Row(
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            Image(
-                                painter = painterResource(R.drawable.home_icon),
-                                contentDescription = "home",
-                                modifier = Modifier.size(40.dp)
-                            )
-                            Text(
-                                text = "서버와 연결하기",
-                                color = Color.White,
-                                fontSize = 14.sp,
-                                fontWeight = FontWeight.Bold
-                            )
-                        }
-
-                    }
-                }
-                Spacer(modifier = Modifier.height(24.dp))
-            }
-        }
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .fillMaxHeight()
-                .background(Color.White),
-            contentAlignment = Alignment.Center
-        ) {
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth(),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center
             ) {
-                Text(
-                    text = "환영합니다!",
-                    fontSize = 24.sp,
-                    fontWeight = FontWeight.Bold,
-                    color = Color.Black,
-                    textAlign = TextAlign.Center
-                )
-                Spacer(modifier = Modifier.height(16.dp))
+            Image(
+                painter = painterResource(R.drawable.home_logo),
+                contentDescription = "home-logo",
+                modifier = Modifier.size(300.dp)
+            )
+            Spacer(Modifier.height(10.dp))
+            Text(
+                text = "환영합니다!",
+                fontSize = 28.sp,
+                color = Color.Black,
+                fontWeight = FontWeight.Bold
+            )
+            Spacer(Modifier.height(10.dp))
+            Text(
+                text = "서버와 연결하여 다양한 소식을 실시간으로 받아보세요!",
+                fontSize = 16.sp,
+                color = Color.Gray,
+                fontWeight = FontWeight.Normal
+            )
+            Spacer(Modifier.height(50.dp))
+            Button(
+                onClick = {
 
-                Text(
-                    text = "서버와 연결하여\n다양한 소식을 실시간으로 받아보세요!",
-                    textAlign = TextAlign.Center,
-                    fontSize = 16.sp,
-                    color = Color.DarkGray,
-                    fontWeight = FontWeight.Bold
-                )
-                Spacer(modifier = Modifier.height(16.dp))
-                Menu.values().forEach { menu ->
-                    HomeMenu(menu = menu)
+                },
+                colors = ButtonDefaults.buttonColors(containerColor = Green20),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(48.dp)
+                    .padding(horizontal = 48.dp)
+            ) {
+                Row(
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Image(
+                        painter = painterResource(R.drawable.home_icon),
+                        contentDescription = "home",
+                        modifier = Modifier.size(32.dp)
+                    )
+                    Text(
+                        text = "서버와 연결하기",
+                        color = Color.White,
+                        fontSize = 14.sp,
+                        fontWeight = FontWeight.Bold
+                    )
                 }
             }
-        }
-    }
-}
-
-@Composable
-private fun HomeMenu(
-    menu: Menu
-) {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(horizontal = 16.dp, vertical = 8.dp)
-            .background(Color.White, shape = RoundedCornerShape(16.dp))
-            .padding(16.dp),
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        Box(
-            modifier = Modifier
-                .size(48.dp)
-                .background(menu.backgroundColor, shape = RoundedCornerShape(12.dp)),
-            contentAlignment = Alignment.Center
-        ) {
-            Image(
-                painter = painterResource(id = menu.iconRes),
-                contentDescription = menu.title,
-                modifier = Modifier.size(24.dp)
-            )
-        }
-
-        Spacer(modifier = Modifier.width(16.dp))
-
-        Column {
-            Text(
-                text = menu.title,
-                fontWeight = FontWeight.Bold,
-                fontSize = 16.sp,
-                color = Color.Black
-            )
-
-            Spacer(modifier = Modifier.height(4.dp))
-
-            Text(
-                text = menu.description,
-                fontSize = 14.sp,
-                color = Color.Gray
-            )
         }
     }
 }
