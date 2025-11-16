@@ -32,7 +32,6 @@ class AuthViewModel(private val uuidStore: UuidStore) : ViewModel() {
 
     fun connectToServer() {
         val code = _authCode.value
-
         viewModelScope.launch {
             try{
                 val snapshot = db.collection("linkCodes")
