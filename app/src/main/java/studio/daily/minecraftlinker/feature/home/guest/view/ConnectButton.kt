@@ -2,10 +2,12 @@ package studio.daily.minecraftlinker.feature.home.guest.view
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
@@ -41,8 +43,9 @@ fun ConnectButton(
             Image(
                 painter = painterResource(R.drawable.home_icon),
                 contentDescription = "home",
-                modifier = Modifier.size(32.dp)
+                modifier = Modifier.size(26.dp)
             )
+            Spacer(Modifier.width(6.dp))
             Text(
                 text = GuestText.CONNECT_BUTTON,
                 color = Color.White,
