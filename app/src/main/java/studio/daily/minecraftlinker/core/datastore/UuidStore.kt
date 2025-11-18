@@ -18,6 +18,12 @@ class UuidStore(private val context: Context) {
         }
     }
 
+    suspend fun clearUUID() {
+        context.dataStore.edit { preferences ->
+            preferences.remove(UUID)
+        }
+    }
+
     val uuidFlow: Flow<String?> = context.dataStore.data
         .map { preferences ->
             preferences[UUID]

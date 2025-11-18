@@ -2,15 +2,11 @@ package studio.daily.minecraftlinker.feature.home.member.view
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.statusBars
-import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -18,7 +14,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import studio.daily.minecraftlinker.core.datastore.UuidStore
 import studio.daily.minecraftlinker.core.network.mojang.MojangRetrofitProvider
@@ -33,7 +28,9 @@ import studio.daily.minecraftlinker.feature.home.member.viewmodel.RewardViewMode
 import studio.daily.minecraftlinker.feature.home.member.viewmodel.ServerViewModel
 
 @Composable
-fun HomeScreen() {
+fun MemberScreen(
+    onLogout: () -> Unit
+) {
     val context = LocalContext.current
     val statusBarHeight = WindowInsets.statusBars.asPaddingValues().calculateTopPadding()
 
@@ -99,6 +96,11 @@ fun HomeScreen() {
                         onRefresh = {
                             serverViewModel.loadPlayers()
                             friendViewModel.loadFriends()
+                        },
+                        onLogout = {
+                            homeViewModel.logout {
+                                onLogout()
+                            }
                         }
                     )
                     serverResponse?.let { response ->

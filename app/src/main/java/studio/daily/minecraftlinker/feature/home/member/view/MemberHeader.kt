@@ -31,7 +31,8 @@ fun Header(
     profile: MinecraftProfile,
     statusBarHeight: Dp,
     context: Context,
-    onRefresh: () -> Unit
+    onRefresh: () -> Unit,
+    onLogout: () -> Unit
 ) {
     Row(
         modifier = Modifier
@@ -84,7 +85,7 @@ fun Header(
                 modifier = Modifier
                     .size(32.dp)
                     .clickable {
-                        // TODO 로그아웃 함수 구현하기
+                        onLogout()
                     }
             )
         }

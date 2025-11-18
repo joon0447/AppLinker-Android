@@ -50,4 +50,13 @@ class HomeViewModel(
             }
         }
     }
+
+    fun logout(onComplete: () -> Unit) {
+        viewModelScope.launch {
+            uuidStore.clearUUID()
+            _uuid.value = null
+            _uiState.value = HomeUiState.Idle
+            onComplete()
+        }
+    }
 }
