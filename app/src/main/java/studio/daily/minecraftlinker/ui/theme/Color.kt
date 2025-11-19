@@ -20,7 +20,7 @@ val Blue20 = Color(0xFF1976D2)
 val Brown60 = Color(0xFF92400E)
 val DarkBlue80 = Color(0xFF0F172A)
 
-val Gray40 = Color(0xFFF8FAFC)
+val Gray40 = Color(0xFFE3E3E7)
 val Gray60 = Color(0xFF808080)
 val Gray80 = Color(0xFF6B7280)
 

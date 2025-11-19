@@ -16,6 +16,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import studio.daily.minecraftlinker.ui.text.MemberText
+import studio.daily.minecraftlinker.ui.theme.Gray40
 import studio.daily.minecraftlinker.ui.theme.Gray60
 import studio.daily.minecraftlinker.ui.theme.Gray80
 
@@ -33,7 +34,7 @@ fun ServerInfo(
                 .fillMaxWidth()
                 .padding(16.dp)
                 .background(
-                    Gray60,
+                    Gray40,
                     shape = RoundedCornerShape(12.dp)
                 ),
             contentAlignment = Alignment.Center
