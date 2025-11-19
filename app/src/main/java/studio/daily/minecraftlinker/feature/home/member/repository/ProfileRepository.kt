@@ -1,7 +1,6 @@
 package studio.daily.minecraftlinker.feature.home.member.repository
 
 import android.net.http.HttpException
-import android.util.Log
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import studio.daily.minecraftlinker.core.network.mojang.MojangApi

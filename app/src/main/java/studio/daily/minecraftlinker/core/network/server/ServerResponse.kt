@@ -9,11 +9,6 @@ data class ServerResponse(
 )
 
 @Serializable
-data class CheckInRequest(
-    val uuid: String
-)
-
-@Serializable
 data class CheckInResponse(
     val success: Boolean,
     val message: String? = null

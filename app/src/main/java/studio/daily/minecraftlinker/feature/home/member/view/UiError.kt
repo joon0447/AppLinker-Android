@@ -8,9 +8,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.layout.ModifierLocalBeyondBoundsLayout
 import androidx.compose.ui.unit.dp
-import studio.daily.minecraftlinker.feature.home.member.viewmodel.HomeViewModel
 import studio.daily.minecraftlinker.ui.text.MemberText
 
 @Composable
