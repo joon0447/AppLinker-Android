@@ -1,6 +1,7 @@
 package studio.daily.minecraftlinker.feature.home.member.repository
 
 import android.net.http.HttpException
+import android.util.Log
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import studio.daily.minecraftlinker.core.network.mojang.MojangApi
@@ -19,7 +20,7 @@ class ProfileRepository(
             throw IllegalStateException("플레이어 프로필을 찾을 수 없습니다. (uuid=$uuidNoHyphen)", e)
         }
 
-        var skinUrl = buildAvatarUrl(uuidNoHyphen)
+        var skinUrl = buildAvatarUrl(uuidRaw)
 
         return@withContext MinecraftProfile(
             id = response.id,
@@ -33,7 +34,7 @@ class ProfileRepository(
         size: Int = 256,
         overlay: Boolean = true
     ): String {
-        val base = "https://crafatar.com/avatars/$uuidNoHyphen"
+        val base = "https://mc-heads.net/head/$uuidNoHyphen"
         val params = buildString {
             append("?size=$size")
             if(overlay) append("&overlay")
