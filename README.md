@@ -14,7 +14,7 @@
 - 서버의 현재 접속 인원을 확인할 수 있습니다.
 
 ## 시연 영상
-https://drive.google.com/file/d/1RgdM1-WDPuzeeV6DgLg8pXXp9AxW3vcB/view?usp=sharing
+[시연 영상 바로가기](https://drive.google.com/file/d/1RgdM1-WDPuzeeV6DgLg8pXXp9AxW3vcB/view?usp=sharing)
 
 
 ## 구현 기능 목록
