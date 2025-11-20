@@ -36,8 +36,8 @@ class ProfileRepository(
         val base = "https://mc-heads.net/head/$uuidNoHyphen"
         val params = buildString {
             append("?size=$size")
-            if(overlay) append("&overlay")
+            if (overlay) append("&overlay")
         }
-        return base+params
+        return base + params
     }
 }

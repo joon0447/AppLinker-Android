@@ -24,8 +24,8 @@ class RewardRepository(
     }
 
     private fun checkDateIsSame(rewardedAt: String?): Boolean {
-        if(rewardedAt.isNullOrBlank()) return true
-        return try{
+        if (rewardedAt.isNullOrBlank()) return true
+        return try {
             val lastDate = LocalDate.parse(rewardedAt, formatter)
             val today = LocalDate.now(zoneId)
             lastDate != today
