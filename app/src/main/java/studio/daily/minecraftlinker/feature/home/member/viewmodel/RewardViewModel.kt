@@ -16,10 +16,10 @@ class RewardViewModel(
 
     fun loadRewardStatus(uuid: String) {
         viewModelScope.launch {
-            try{
+            try {
                 val canReceive = repository.canReceivedRewardToday(uuid)
                 _canReceiveToday.value = canReceive
-            } catch(e: Exception) {
+            } catch (e: Exception) {
                 _canReceiveToday.value = true
             }
         }

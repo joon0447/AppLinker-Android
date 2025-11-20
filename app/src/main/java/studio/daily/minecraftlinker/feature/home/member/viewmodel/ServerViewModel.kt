@@ -8,7 +8,7 @@ import kotlinx.coroutines.launch
 import studio.daily.minecraftlinker.core.network.server.ServerResponse
 import studio.daily.minecraftlinker.feature.home.member.repository.ServerRepository
 
-class ServerViewModel: ViewModel() {
+class ServerViewModel : ViewModel() {
 
     private val repository = ServerRepository()
 
@@ -17,7 +17,7 @@ class ServerViewModel: ViewModel() {
 
     fun loadPlayers() {
         viewModelScope.launch {
-            try{
+            try {
                 val response = repository.fetchPlayers()
                 _serverResponse.value = response
             } catch (e: Exception) {
@@ -28,9 +28,9 @@ class ServerViewModel: ViewModel() {
 
     fun checkIn(uuid: String) {
         viewModelScope.launch {
-            try{
+            try {
                 val response = repository.checkIn(uuid)
-            }catch(e: Exception) {
+            } catch (e: Exception) {
                 println("API 에러 : ${e.message}")
             }
         }

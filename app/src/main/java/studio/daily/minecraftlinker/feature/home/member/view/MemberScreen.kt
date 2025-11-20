@@ -72,7 +72,7 @@ fun MemberScreen(
             is HomeUiState.Error -> {
                 UiError(
                     message = s.message,
-                    onRetry = {homeViewModel.refresh()},
+                    onRetry = { homeViewModel.refresh() },
                     modifier = Modifier.align(Alignment.Center)
                 )
             }
@@ -117,6 +117,7 @@ fun MemberScreen(
                                 }
                             })
                         }
+
                         false -> CompleteCheckIn()
                     }
                 }

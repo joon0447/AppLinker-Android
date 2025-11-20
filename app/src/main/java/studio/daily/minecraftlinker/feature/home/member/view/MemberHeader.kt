@@ -66,10 +66,10 @@ fun Header(
                 fontWeight = FontWeight.Bold
             )
         }
-        Row (
+        Row(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(10.dp)
-        ){
+        ) {
             Image(
                 painter = painterResource(id = R.drawable.material_symbols_refresh),
                 contentDescription = "새로고침",

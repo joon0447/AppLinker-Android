@@ -38,9 +38,9 @@ class FriendViewModel(
             _isLoading.value = true
             _error.value = null
 
-            try{
+            try {
                 val uuid = uuidStore.uuidFlow.first()
-                if(uuid.isNullOrBlank()) {
+                if (uuid.isNullOrBlank()) {
                     _error.value = "UUID가 없습니다."
                     _isLoading.value = false
                     return@launch
@@ -51,7 +51,7 @@ class FriendViewModel(
                     .get()
                     .await()
 
-                if(snapshot.exists()) {
+                if (snapshot.exists()) {
                     val friends = snapshot.get("friends") as? List<String> ?: emptyList()
                     _friendUuids.value = friends
 
@@ -59,12 +59,12 @@ class FriendViewModel(
                     val onlineUuids = serverResponse.uuids.toSet()
 
                     val profiles = friends.mapNotNull { friendUuid ->
-                        try{
+                        try {
                             val profile = repository.fetchProfile(friendUuid)
                             profile.copy(
                                 isOnline = onlineUuids.contains(friendUuid)
                             )
-                        }catch(e: Exception) {
+                        } catch (e: Exception) {
                             Log.e("FriendViewModel", "프로필 가져오기 실패: $friendUuid", e)
                             null
                         }
@@ -74,10 +74,10 @@ class FriendViewModel(
                 } else {
                     _error.value = "친구가 없습니다."
                 }
-            } catch(e: Exception) {
+            } catch (e: Exception) {
                 Log.e("FriendViewModel", "친구 로딩 실패", e)
                 _error.value = "친구 로딩 중 오류가 발생했습니다."
-            }finally {
+            } finally {
                 _isLoading.value = false
             }
         }

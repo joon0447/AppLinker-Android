@@ -54,7 +54,7 @@ fun AppNavGraph(navController: NavHostController) {
             AuthScreen(
                 onBack = {
                     val popped = navController.popBackStack()
-                    if(!popped) {
+                    if (!popped) {
                         navController.navigate(Routes.SPLASH) {
                             launchSingleTop = true
                         }
@@ -62,7 +62,7 @@ fun AppNavGraph(navController: NavHostController) {
                 },
                 onLoginSuccess = {
                     navController.navigate(Routes.HOME) {
-                        popUpTo(Routes.GUEST) {inclusive = true}
+                        popUpTo(Routes.GUEST) { inclusive = true }
                         launchSingleTop = true
                     }
                 }
@@ -73,7 +73,7 @@ fun AppNavGraph(navController: NavHostController) {
             MemberScreen(
                 onLogout = {
                     navController.navigate(Routes.GUEST) {
-                        popUpTo(0) {inclusive = true}
+                        popUpTo(0) { inclusive = true }
                         launchSingleTop = true
                     }
                 }

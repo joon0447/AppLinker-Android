@@ -37,8 +37,10 @@ fun FriendsList(
             .fillMaxWidth()
             .padding(24.dp)
     ) {
-        Text(MemberText.FRIEND_LIST_TITLE,
-            style = MaterialTheme.typography.titleMedium)
+        Text(
+            MemberText.FRIEND_LIST_TITLE,
+            style = MaterialTheme.typography.titleMedium
+        )
         Spacer(Modifier.height(8.dp))
 
         if (profiles.isEmpty()) {

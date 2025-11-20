@@ -39,8 +39,10 @@ fun CheckIn(
             .fillMaxWidth()
             .padding(24.dp)
     ) {
-        Text(MemberText.CHECK_IN_TITLE,
-            style = MaterialTheme.typography.titleMedium)
+        Text(
+            MemberText.CHECK_IN_TITLE,
+            style = MaterialTheme.typography.titleMedium
+        )
         Spacer(Modifier.height(8.dp))
         Box(
             modifier = Modifier

@@ -9,7 +9,7 @@ class MainViewModelFactory(
     private val appContext: Context
 ) : ViewModelProvider.Factory {
     @Suppress("UNCHECKED_CAST")
-    override fun <T: ViewModel> create(modelClass: Class<T>): T {
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
         require(modelClass.isAssignableFrom(MainViewModel::class.java))
         return MainViewModel(UuidStore(appContext)) as T
     }

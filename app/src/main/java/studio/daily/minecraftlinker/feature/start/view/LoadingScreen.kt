@@ -19,7 +19,7 @@ fun LoadingScreen(
     val startDest = viewModel.startDestination.collectAsStateWithLifecycle().value
 
     LaunchedEffect(startDest) {
-        when(startDest) {
+        when (startDest) {
             MainViewModel.StartDestination.Guest -> onResolved(Routes.GUEST)
             MainViewModel.StartDestination.Home -> onResolved(Routes.HOME)
             else -> Unit
